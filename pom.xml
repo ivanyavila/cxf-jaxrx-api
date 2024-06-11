@@ -13,7 +13,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
-		<tomcat.webapps.folder>path/to/tomcat/deployment/folder</tomcat.webapps.folder>
 	</properties>
 
 	<dependencies>
@@ -63,7 +62,6 @@
 						</resource>
 					</webResources>
 					<warName>cxf-jaxrx-api</warName>
-					<outputDirectory>${tomcat.webapps.folder}</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

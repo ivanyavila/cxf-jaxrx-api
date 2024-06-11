@@ -1,12 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-						http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	   xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://cxf.apache.org/jaxrs
+	   http://cxf.apache.org/schemas/jaxrs.xsd
+	   http://cxf.apache.org/transports/http/configuration
+	   http://cxf.apache.org/schemas/configuration/http-conf.xsd">
 
-	<jaxrs:server id="studentControler" address="/">
+	<context:component-scan base-package="com.jaxrs.api.service"/>
+
+	<jaxrs:server id="rootServicesBeans" address="/">
 		<jaxrs:serviceBeans>
-			<bean id="studentsBean" class="controller.StudentController" />
+			<ref bean="homeServiceBean" />
+			<ref bean="healthServiceBean" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<jaxrs:server id="restServicesBeans" address="/rest">
+		<jaxrs:serviceBeans>
+			<ref bean="studentServiceBean" />
 		</jaxrs:serviceBeans>
 
 		<jaxrs:providers>

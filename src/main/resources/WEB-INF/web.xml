@@ -13,21 +13,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<filter>
-		<filter-name>simplePageCachingFilter</filter-name>
-		<filter-class>
-			net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
-		<init-param>
-			<param-name>cacheName</param-name>
-			<param-value>simplePageCachingFilter</param-value>
-		</init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>simplePageCachingFilter</filter-name>
-		<url-pattern>/cxf-jaxrx-api/student/all</url-pattern>
-	</filter-mapping>
-
 	<servlet>
 		<servlet-name>CXFServlet</servlet-name>
 		<servlet-class>

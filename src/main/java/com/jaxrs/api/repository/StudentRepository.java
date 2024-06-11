@@ -1,9 +1,9 @@
-package repository;
+package com.jaxrs.api.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Student;
+import com.jaxrs.api.model.Student;
 
 
 public class StudentRepository {
@@ -11,11 +11,11 @@ public class StudentRepository {
 	public static List<Student> students = new ArrayList<>();
 	
 	static {
-		int studentsToLaod = 1000000;
-		System.out.println("Initializing with " + studentsToLaod + " students");
-		for (int i = 0; i < studentsToLaod; i++)
+		int studentsToLoad = 50;
+		System.out.println("Initializing with " + studentsToLoad + " students");
+		for (int i = 0; i < studentsToLoad; i++)
 			students.add(new Student());
-		System.out.println(studentsToLaod + " Students loaded ...");
+		System.out.println(studentsToLoad + " Students loaded ...");
 	}
 	
 	public Student postStudent(String name) {

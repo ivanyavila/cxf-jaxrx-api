@@ -1,4 +1,4 @@
-package model;
+package com.jaxrs.api.model;
 
 public class Student {
 	private static int currentId=1;
