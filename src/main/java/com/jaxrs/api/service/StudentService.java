@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jaxrs.api.iservice.IStudentService;
 import com.jaxrs.api.model.Student;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.jaxrs.api.repository.StudentRepository;
 
@@ -25,6 +26,7 @@ public class StudentService implements IStudentService {
 	}
 
 	@Override
+	@Cacheable("cacheStudentList")
 	public List<Student> getAllStudents() {
 		System.out.print("GET: allStudents ");
 		List<Student> students = studentRepository.getAllStudents();

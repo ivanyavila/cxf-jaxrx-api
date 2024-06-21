@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	   xmlns:cxf="http://cxf.apache.org/core"
+	   xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:http="http://cxf.apache.org/transports/http/configuration"
-	   xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/context
+	   xmlns:sec="http://cxf.apache.org/configuration/security"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
+
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context.xsd
 	   http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://cxf.apache.org/jaxws
+	   http://cxf.apache.org/schemas/jaxws.xsd
+	   http://cxf.apache.org/core
+	   http://cxf.apache.org/schemas/core.xsd
 	   http://cxf.apache.org/jaxrs
 	   http://cxf.apache.org/schemas/jaxrs.xsd
+	   http://cxf.apache.org/jaxrs-client
+	   https://cxf.apache.org/schemas/jaxrs-client.xsd
 	   http://cxf.apache.org/transports/http/configuration
-	   http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+	   http://cxf.apache.org/schemas/configuration/http-conf.xsd
+	   http://cxf.apache.org/configuration/security
+	   http://cxf.apache.org/schemas/configuration/security.xsd
+	   http://www.springframework.org/schema/util
+	   http://www.springframework.org/schema/util/spring-util-2.5.xsd
+	   http://www.springframework.org/schema/task
+	   http://www.springframework.org/schema/task/spring-task.xsd
+	   http://www.springframework.org/schema/cache
+	   http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 	<context:component-scan base-package="com.jaxrs.api.service"/>
+	<cache:annotation-driven/>
+
+	<bean id ="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache-manager-factory-bean"/>
+	</bean>
+	<bean id="ehcache-manager-factory-bean" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:/ehcache.xml"/>
+		<property name="shared" value="true"/>
+	</bean>
+
 
 	<jaxrs:server id="rootServicesBeans" address="/">
 		<jaxrs:serviceBeans>
